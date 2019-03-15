@@ -54,10 +54,15 @@ registerBlockType( 'cgb/block-my-block', {
     function UpdateContent (event) {
       props.setAttributes({ content: event.target.value })
     }
+    function UpdateColor (event) {
+      props.setAttributes({ color: event.target.value })
+    }
 		return (
 			<div className={ props.className }>
         <p>Enter text here:</p>
         <input type="text" value={ props.attributes.content } onChange={ UpdateContent } />
+        <p>Enter Color here:</p>
+        <input type="text" value={ props.attributes.color } onChange={ UpdateColor } />
 			</div>
 		);
 	},
@@ -72,18 +77,8 @@ registerBlockType( 'cgb/block-my-block', {
 	 */
 	save: function( props ) {
 		return (
-			<div>
-				<p>
-					CGB BLOCK: <code>my-block</code> is a new Gutenberg block.
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
+			<div style={{ backgroundColor: props.attributes.color }}>
+          <h3>{ props.attributes.content }</h3>
 			</div>
 		);
 	},
