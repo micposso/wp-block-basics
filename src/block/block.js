@@ -34,7 +34,12 @@ registerBlockType( 'cgb/block-my-block', {
 		__( 'my-block — CGB Block' ),
 		__( 'CGB Example' ),
 		__( 'create-guten-block' ),
-	],
+  ],
+  attributes: {
+    content: { type: 'string'},
+    color: { type: 'string' }
+  },
+  
 
 	/**
 	 * The edit function describes the structure of your block in the context of the editor.
@@ -45,21 +50,14 @@ registerBlockType( 'cgb/block-my-block', {
 	 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 	 */
 	edit: function( props ) {
-		// Creates a <p class='wp-block-cgb-block-my-block'></p>.
+    // Creates a <p class='wp-block-cgb-block-my-block'></p>.
+    function UpdateContent (event) {
+      props.setAttributes({ content: event.target.value })
+    }
 		return (
 			<div className={ props.className }>
-				<p>— Hello from the backend.</p>
-				<p>
-					CGB BLOCK: <code>my-block</code> is a new Gutenberg block
-				</p>
-				<p>
-					It was created via{ ' ' }
-					<code>
-						<a href="https://github.com/ahmadawais/create-guten-block">
-							create-guten-block
-						</a>
-					</code>.
-				</p>
+        <p>Enter text here:</p>
+        <input type="text" value={ props.attributes.content } onChange={ UpdateContent } />
 			</div>
 		);
 	},
@@ -75,7 +73,6 @@ registerBlockType( 'cgb/block-my-block', {
 	save: function( props ) {
 		return (
 			<div>
-				<p>— Hello from the frontend.</p>
 				<p>
 					CGB BLOCK: <code>my-block</code> is a new Gutenberg block.
 				</p>
